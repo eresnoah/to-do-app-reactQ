@@ -1,0 +1,55 @@
+.item {
+  margin: 1rem 0;
+}
+  
+.content {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.25rem;
+  color: #2c292b;
+}
+  
+.content h3 {
+  font-size: 1.25rem;
+  color: #2c292b;
+}
+  
+.actions {
+  margin-top: 5rem;
+  text-align: left;
+}
+
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: #ff9e36;
+  color: rgb(255, 255, 255);
+  padding: 0.5rem 1.5rem;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: #ffc054;
+  border-color: #ffffff;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.form {
+  padding: 1rem;
+  font: inherit;
+  font-size: 1.25rem;
+  color: #2c292b;
+}
+
+.control {
+  margin-bottom: 0.5rem;
+}
+
