@@ -10,8 +10,10 @@ import removeTodo from "../pages/api/remove-todo";
 import { useEffect } from "react";
 import { Clerk } from "@clerk/nextjs/dist/types/server";
 
-function useTodos(userId: string) {
-  return useQuery(["todos", userId], () => updateTodos(userId));
+type userToken = Promise<string | null> 
+
+function useTodos(userToken: userToken) {
+  return useQuery(["todos", userToken], () => updateTodos(userToken));
 }
 
 function usePost() {
@@ -34,23 +36,14 @@ function useRemove() {
   });
 }
 
+
 export default function ToDoList() {
   const { getToken } = useAuth();
   const { user, isSignedIn } = useUser();
-  const { data: todos, isLoading } = useTodos(
-    user !== undefined && user !== null ? user.id : ""
+  const { data: todos, isLoading } = useTodos(getToken()
   );
   const post = usePost();
   const remove = useRemove();
-
-  useEffect(() => {
-    if (isSignedIn) {
-      let token = getToken().then((value) => {
-        console.log(value)
-      });
-      console.log(token);
-    }
-  }, [isSignedIn]);
 
   if (isSignedIn) {
     return (

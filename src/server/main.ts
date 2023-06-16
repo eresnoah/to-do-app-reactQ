@@ -2,10 +2,8 @@ import express from "express";
 import zod from "zod";
 import "dotenv";
 import generateID from "../pages/api/generate-id";
-import dotenv from "dotenv";
 import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
-
-console.log(dotenv.config());
+require("dotenv").config();
 
 const app = express();
 
@@ -34,12 +32,8 @@ app.get("/todos", (_, res) => {
   res.json(todos);
 });
 
-app.post(
-  "/usertodos",
-  ClerkExpressWithAuth({
-    // ...options
-  }),
-  (req, res) => {
+app.post("/usertodos", (req, res) => {
+  try {
     const userId = idSchema.parse(req.body).id;
     const userTodos: Todo[] = [];
 
@@ -49,8 +43,10 @@ app.post(
       }
     }
     res.json(userTodos);
+  } catch (error) {
+    res.status(400).json(error);
   }
-);
+});
 
 app.post("/todos", (req, res) => {
   try {

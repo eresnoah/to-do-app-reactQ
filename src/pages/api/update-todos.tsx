@@ -1,9 +1,11 @@
 import axios from "axios";
 import { Todo } from "../../server/main";
 
-export default async function updateTodos(userId: string) {
-  console.log("the query key is ", userId);
-  const todos: Todo[] = await getUserTodos(userId).then((data) => {
+type userToken = Promise<string | null>;
+
+export default async function updateTodos(userToken: userToken) {
+  console.log("the query key is ", userToken);
+  const todos: Todo[] = await getUserTodos(userToken).then((data) => {
     console.log("this is the data: ", data);
 
     const loadedTodos: Todo[] = [];
@@ -21,10 +23,17 @@ export default async function updateTodos(userId: string) {
   return todos;
 }
 
-async function getUserTodos(userId: string) {
-  const {data} = await axios.post("/usertodos", {id: userId}, {
-    headers: { "Content-Type": "application/json" },
-  });
+async function getUserTodos(userToken: userToken) {
+  const { data } = await axios.post(
+    "/usertodos",
+    { userStatus: JSON.stringify(userToken) },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userToken}`,
+      },
+    }
+  );
 
   return data;
 }
