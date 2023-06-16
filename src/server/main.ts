@@ -34,15 +34,7 @@ app.get("/todos", (_, res) => {
 
 app.post("/usertodos", (req, res) => {
   try {
-    const userId = idSchema.parse(req.body).id;
-    const userTodos: Todo[] = [];
-
-    for (const todo of todos) {
-      if (todo.user == userId) {
-        userTodos.push(todo);
-      }
-    }
-    res.json(userTodos);
+    console.log(JSON.stringify(JSON.parse(req.body)))
   } catch (error) {
     res.status(400).json(error);
   }

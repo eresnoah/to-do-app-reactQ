@@ -4,7 +4,7 @@ import { Todo } from "../../server/main";
 type userToken = Promise<string | null>;
 
 export default async function updateTodos(userToken: userToken) {
-  console.log("the query key is ", userToken);
+  console.log("the user token is ", userToken);
   const todos: Todo[] = await getUserTodos(userToken).then((data) => {
     console.log("this is the data: ", data);
 
