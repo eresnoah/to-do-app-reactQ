@@ -33,6 +33,7 @@ app.get("/todos", (_, res) => {
 app.post("/usertodos", (req, res) => {
   try {
     console.log(JSON.parse(req.body));
+    res.json(todos);
   } catch (error) {
     res.status(400).json(error);
   }
