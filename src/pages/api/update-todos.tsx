@@ -26,11 +26,11 @@ export default async function updateTodos(userToken: userToken) {
 async function getUserTodos(userToken: userToken) {
   const { data } = await axios.post(
     "/usertodos",
-    { userStatus: JSON.stringify(userToken) },
+    { userToken: JSON.stringify(userToken) },
     {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
+        Authorization: `Bearer ${JSON.stringify(userToken)}`,
       },
     }
   );
