@@ -1,6 +1,11 @@
 import express from "express";
 import zod from "zod";
-import generateID from "../api/generate-id";
+import "dotenv";
+import generateID from "../pages/api/generate-id";
+import dotenv from "dotenv";
+import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
+
+console.log(dotenv.config());
 
 const app = express();
 
@@ -25,17 +30,27 @@ export interface Todo {
 
 const todos: Todo[] = [];
 
-//allows CORS bypass
-app.use((_, res, next) => {
-  res.append("Access-Control-Allow-Origin", ["*"]);
-  res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-  res.append("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
-
 app.get("/todos", (_, res) => {
   res.json(todos);
 });
+
+app.post(
+  "/usertodos",
+  ClerkExpressWithAuth({
+    // ...options
+  }),
+  (req, res) => {
+    const userId = idSchema.parse(req.body).id;
+    const userTodos: Todo[] = [];
+
+    for (const todo of todos) {
+      if (todo.user == userId) {
+        userTodos.push(todo);
+      }
+    }
+    res.json(userTodos);
+  }
+);
 
 app.post("/todos", (req, res) => {
   try {
@@ -73,7 +88,7 @@ app.post("/todos/remove", (req, res) => {
       if (todos[i].id == deleteObj.id) {
         const deletedTodo = todos.splice(i, 1);
         console.log(deletedTodo);
-        deleted = true
+        deleted = true;
       }
       if (i == todos.length - 1 && !deleted) {
         console.log("ID not found");

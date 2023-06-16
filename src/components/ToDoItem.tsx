@@ -1,4 +1,4 @@
-import removeTodo from "../api/remove-todo";
+import removeTodo from "../pages/api/remove-todo";
 import { Todo } from "../server/main";
 import Card from "./Card";
 import classes from "./Classes.module.css";

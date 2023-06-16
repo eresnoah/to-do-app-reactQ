@@ -10,7 +10,7 @@ export default async function postTodo(formValues: {
     user: formValues.user,
     deadline: formValues.deadline,
   });
-  await axios.post("http://localhost:3001/todos", newTodo, {
+  await axios.post("/todos", newTodo, {
     headers: {
       "Content-Type": "application/json",
     },

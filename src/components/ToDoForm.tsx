@@ -2,7 +2,7 @@ import { FormEvent, FormEventHandler, useEffect, useState } from "react";
 import classes from "./Classes.module.css";
 import Card from "./Card";
 import { useUser } from "@clerk/nextjs";
-import postTodo from "../api/post-todo";
+import postTodo from "../pages/api/post-todo";
 
 interface ToDoFormProps {
   postHandler: (formValues: {

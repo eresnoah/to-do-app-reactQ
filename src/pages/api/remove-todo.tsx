@@ -5,7 +5,7 @@ export default async function removeTodo(todoId: string) {
         id: todoId
     })
 
-    await axios.post("http://localhost:3001/todos/remove", deleteObj, {
+    await axios.post("/todos/remove", deleteObj, {
         headers: {
           "Content-Type": "application/json",
         },

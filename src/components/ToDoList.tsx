@@ -2,14 +2,16 @@ import ToDoItem from "./ToDoItem";
 import ToDoForm from "./ToDoForm";
 import classes from "./Classes.module.css";
 import { Todo } from "../server/main";
-import { useUser } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import updateTodos from "../api/update-todos";
-import postTodo from "../api/post-todo";
-import removeTodo from "../api/remove-todo";
+import updateTodos from "../pages/api/update-todos";
+import postTodo from "../pages/api/post-todo";
+import removeTodo from "../pages/api/remove-todo";
+import { useEffect } from "react";
+import { Clerk } from "@clerk/nextjs/dist/types/server";
 
-function useTodos() {
-  return useQuery("todos", updateTodos);
+function useTodos(userId: string) {
+  return useQuery(["todos", userId], () => updateTodos(userId));
 }
 
 function usePost() {
@@ -33,10 +35,22 @@ function useRemove() {
 }
 
 export default function ToDoList() {
-  const { isSignedIn } = useUser();
-  const { data: todos, isLoading } = useTodos();
+  const { getToken } = useAuth();
+  const { user, isSignedIn } = useUser();
+  const { data: todos, isLoading } = useTodos(
+    user !== undefined && user !== null ? user.id : ""
+  );
   const post = usePost();
   const remove = useRemove();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      let token = getToken().then((value) => {
+        console.log(value)
+      });
+      console.log(token);
+    }
+  }, [isSignedIn]);
 
   if (isSignedIn) {
     return (

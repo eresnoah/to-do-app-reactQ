@@ -1,6 +1,6 @@
 import classes from "../components/Classes.module.css";
 import ToDoList from "../components/ToDoList";
-import { useUser } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import { SignIn } from "@clerk/nextjs";
 
 export default function Home() {
