@@ -1,9 +1,7 @@
 import express from "express";
 import zod from "zod";
-import "dotenv";
 import generateID from "../pages/api/generate-id";
 import { ClerkExpressWithAuth } from "@clerk/clerk-sdk-node";
-require("dotenv").config();
 
 const app = express();
 
