@@ -34,13 +34,13 @@ app.get("/todos", (_, res) => {
 
 app.post("/usertodos", (req, res) => {
   try {
-    console.log(JSON.stringify(JSON.parse(req.body)))
+    console.log(JSON.stringify(JSON.parse(req.body)));
   } catch (error) {
     res.status(400).json(error);
   }
 });
 
-app.post("/todos", (req, res) => {
+app.post("/todos", ClerkExpressWithAuth({}), (req, res) => {
   try {
     const parsedNewTodo = newTodoSchema.parse(req.body);
 
