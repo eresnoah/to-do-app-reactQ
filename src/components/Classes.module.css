@@ -1,6 +1,11 @@
 .item {
   margin: 1rem 0;
 }
+
+.item button {
+  margin-left: 0.2rem;
+  margin-top: 0.3rem;
+}
   
 .content {
   text-align: center;
@@ -15,7 +20,7 @@
 }
   
 .actions {
-  margin-top: 5rem;
+  margin-top: 2rem;
   text-align: left;
 }
 
@@ -49,7 +54,17 @@
   color: #2c292b;
 }
 
+.form div {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .control {
   margin-bottom: 0.5rem;
+}
+
+.control img {
+  max-width: 100%;
+  height: auto;
 }
 

@@ -10,9 +10,11 @@
     align-items: center;
     justify-content: space-between;
     background-color: #e7c86e;
-    padding: 0 10%;
+    background-image: url("https://www.shutterstock.com/image-illustration/clouds-clear-sky-anime-background-260nw-2168632159.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
-  
+
   .logo {
     font-size: 5rem;
     color: white;
@@ -25,6 +27,7 @@
     padding: 0;
     display: flex;
     align-items: baseline;
+    padding: 0 10%;
   }
   
   .header li {
@@ -33,14 +36,14 @@
   
   .header a {
     text-decoration: none;
-    font-size: 1.5rem;
-    color: #fcb8d2;
+    font-size: 2rem;
+    color: #ffffff;
   }
   
   .header a:hover,
   .header a:active,
   .header a.active {
-    color: white;
+    color: rgb(102, 84, 84);
   }
   
   .badge {

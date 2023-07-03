@@ -1,7 +1,11 @@
 import classes from "../components/Classes.module.css";
 import ToDoList from "../components/ToDoList";
-import { useAuth, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { SignIn } from "@clerk/nextjs";
+import bcrypt from "bcrypt"
+
+const encriptionRounds = 5
+const examplePassword = "nevermindme1234"
 
 export default function Home() {
   const { isLoaded, isSignedIn } = useUser();
